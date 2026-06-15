@@ -42,7 +42,7 @@ class PhoneVerificationCodeGrant extends AbstractGrant
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         \DateInterval $accessTokenTTL
-    )
+    ): ResponseTypeInterface
     {
         // Validate request
         $client = $this->validateClient($request);
@@ -105,7 +105,7 @@ class PhoneVerificationCodeGrant extends AbstractGrant
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return 'phone_verification_code';
     }

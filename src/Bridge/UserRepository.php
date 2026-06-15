@@ -15,7 +15,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getUserEntityByUserCredentials($phoneNumber, $verificationCode, $grantType, ClientEntityInterface $clientEntity)
+    public function getUserEntityByUserCredentials(string $phoneNumber, string $verificationCode, string $grantType, ClientEntityInterface $clientEntity): ?\League\OAuth2\Server\Entities\UserEntityInterface
     {
         $provider = config('auth.guards.api.provider');
 
@@ -34,7 +34,7 @@ class UserRepository implements UserRepositoryInterface
         $user = $userInstance->findOrCreateForPassportVerifyCodeGrant($phoneNumber);
 
         if (!$user || !$user->validateForPassportVerifyCodeGrant($verificationCode)) {
-            return;
+            return null;
         }
 
         return new User($user->getAuthIdentifier());
